@@ -5,13 +5,15 @@ if not status then
 end
 
 for i, mapping in ipairs(hyperModeAppMappings) do
-  hs.hotkey.bind({'shift', 'ctrl', 'alt', 'cmd'}, mapping[1], function()
-    local appName = mapping[2]
-    local app = hs.application.get(appName)
-    if app then
-      app:activate()
+  local key = mapping[1]
+  local app = mapping[2]
+  hs.hotkey.bind({'shift', 'ctrl', 'alt', 'cmd'}, key, function()
+    if (type(app) == 'string') then
+      hs.application.open(app)
+    elseif (type(app) == 'function') then
+      app()
     else
-      hs.application.launchOrFocus(appName)
+      hs.logger.new('hyper'):e('Invalid mapping for Hyper +', key)
     end
   end)
 end

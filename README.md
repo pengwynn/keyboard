@@ -164,8 +164,8 @@ Hyper Mode ships with the default keybindings below, but you'll likely want to p
 This setup is honed and tested with the following dependencies.
 
 - macOS High Sierra, 10.13
-- [Karabiner-Elements 11.4.0][karabiner]
-- [Hammerspoon 0.9.57][hammerspoon]
+- [Karabiner-Elements 12.2.0][karabiner]
+- [Hammerspoon 0.9.73][hammerspoon]
 
 ## Installation
 
@@ -180,6 +180,10 @@ This setup is honed and tested with the following dependencies.
     ```
 
 2. Enable accessibility to allow Hammerspoon to do its thing [[screenshot]](screenshots/accessibility-permissions-for-hammerspoon.png)
+
+3. On macOS High Sierra or later, you'll be [prompted to allow Karabiner-Elements to load its kernel extension](https://pqrs.org/osx/karabiner/document.html#usage). Follow the prompts to upgrade your life:
+    1. Click "Open System Preferences" [[screenshot]](https://github.com/jasonrudolph/keyboard/blob/v5.0.0/screenshots/karabiner-elements-system-extension-prompt-1.png)
+    1. Click "Allow" [[screenshot]](https://github.com/jasonrudolph/keyboard/blob/v5.0.0/screenshots/karabiner-elements-system-extension-prompt-2.png)
 
 ## TODO
 
