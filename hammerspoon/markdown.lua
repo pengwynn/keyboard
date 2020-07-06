@@ -48,6 +48,32 @@ function inlineLink()
   end)
 end
 
+
+function wikiLink()
+  -- Stash the system clipboard
+  local prevClipboard = hs.pasteboard.getContents()
+
+  -- Copy the currently-selected text to use as the link text
+  keyUpDown('cmd', 'c')
+
+  -- Allow some time for the command+c keystroke to fire asynchronously before
+  -- we try to read from the clipboard
+  hs.timer.doAfter(0.2, function()
+    -- Construct the formatted output and paste it over top of the
+    -- currently-selected text
+    local linkText = hs.pasteboard.getContents()
+    local markdown = '[[' .. linkText .. ']]'
+    hs.pasteboard.setContents(markdown)
+    keyUpDown('cmd', 'v')
+
+    -- Allow some time for the command+v keystroke to fire asynchronously before
+    -- we restore the original clipboard
+    hs.timer.doAfter(0.2, function()
+      hs.pasteboard.setContents(prevClipboard)
+    end)
+  end)
+end
+
 --------------------------------------------------------------------------------
 -- Define Markdown Mode
 --
@@ -101,6 +127,10 @@ end)
 
 markdownMode:bindWithAutomaticExit('c', function()
   wrapSelectedText('`')
+end)
+
+markdownMode:bindWithAutomaticExit('w', function()
+  wikiLink()
 end)
 
 -- Use Control+m to toggle Markdown Mode
